@@ -5,7 +5,6 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
-import net.serenitybdd.screenplay.actions.EnterValue;
 
 import static co.com.conduit.website.models.DatosPrueba.obtener;
 import static co.com.conduit.website.userinterface.zonapublica.RegisterPage.*;
