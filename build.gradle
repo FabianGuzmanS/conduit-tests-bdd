@@ -12,7 +12,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath("net.serenity-bdd:serenity-gradle-plugin:4.0.21")
+        classpath("net.serenity-bdd:serenity-gradle-plugin:4.0.24")
     }
 }
 
@@ -27,8 +27,8 @@ compileTestJava.options.encoding = "UTF-8"
 defaultTasks 'clean', 'test', 'aggregate'
 
 ext {
-    serenityVersion = "4.0.21"
-    serenityCucumberVersion = "4.0.21"
+    serenityVersion = "4.0.24"
+    serenityCucumberVersion = "4.0.24"
     jUnitVersion = '4.13.2'
     apachePoiVersion = '5.2.3'
 }
