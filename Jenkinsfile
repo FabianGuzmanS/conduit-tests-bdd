@@ -49,32 +49,17 @@ pipeline {
         stage('Publicar resultados') {
             steps {
                 script {
-                    try {
-                        bat "rename \"${WORKSPACE}\\target\" serenity_${timestamp}"
-                        echo 'Backup de evidencias realizado con exito'
-                        publishHTML([
-                            reportName: 'Reporte resultados automatización Conduit Website',
-                            reportDir: "${WORKSPACE}//serenity_${timestamp}",
+                    publishHTML([
+                            reportName: "Reporte_resultados_automatizacion_Conduit_Website_${timestamp}",
+                            reportDir: "${WORKSPACE}//target",
                             reportFiles: 'index.html',
                             reportTitles: 'Proyecto Conduit tests bdd',
+                            escapeUnderscores: false,
                             allowMissing: false,
                             alwaysLinkToLastBuild: true,
                             keepAll: true
-                        ])
-                        echo 'Reporte Serenity realizado con exito'
-                    } catch (e) {
-                        echo 'No se realizo el Backup de evidencias'
-                        publishHTML([
-                            reportName: 'Reporte resultados automatización Conduit Website',
-                            reportDir: "${WORKSPACE}//serenity_${timestamp}",
-                            reportFiles: 'index.html',
-                            reportTitles: 'Proyecto Conduit tests bdd',
-                            allowMissing: false,
-                            alwaysLinkToLastBuild: true,
-                            keepAll: true
-                        ])
-                        echo 'Reporte Html realizado con exito'
-                    }
+                    ])
+                    echo 'Reporte Serenity Html realizado con exito'
                 }
             }
         }
