@@ -11,25 +11,10 @@ pipeline {
         stage('Obtener fuentes') {
             steps {
                 checkout(
-                [$class: 'GitSCM', branches: [[name: "automation_qa"]],
+                [$class: 'GitSCM', branches: [[name: "master"]],
                 wdoGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [],
                 userRemoteConfigs: [[credentialsId: "github_auth_credentials", url: "https://github.com/FabianGuzmanS/conduit-tests-bdd.git"]]])
-                //git branch: 'automation_qa', credentialsId: 'github_auth_credentials', url: 'https://github.com/FabianGuzmanS/reqres-tests-bdd.git'
-            }
-        }
-        stage('Compilar proyecto') {
-            steps {
-                bat ".\\gradlew assemble"
-            }
-        }
-        stage('Analisis SonarQube') {
-            steps {
-                script {
-                    scannerHome = tool 'sonarqube_scanner'
-                }
-                withSonarQubeEnv('sonarqube_server') {
-                    bat "${scannerHome}/bin/sonar-scanner.bat"
-                }
+                //git branch: 'master', credentialsId: 'github_auth_credentials', url: 'https://github.com/FabianGuzmanS/conduit-tests-bdd.git'
             }
         }
         stage('Ejecutar tests') {
@@ -43,6 +28,16 @@ pipeline {
                         echo 'Test Ejecutados con Fallo'
                         currentBuild.result = 'UNSTABLE'
                     }
+                }
+            }
+        }
+        stage('Analisis SonarQube') {
+            steps {
+                script {
+                    scannerHome = tool 'sonarqube_scanner'
+                }
+                withSonarQubeEnv('sonarqube_server') {
+                    bat "${scannerHome}/bin/sonar-scanner.bat"
                 }
             }
         }
