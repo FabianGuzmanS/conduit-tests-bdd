@@ -40,11 +40,16 @@ dependencies {
     implementation "net.serenity-bdd:serenity-cucumber:$rootProject.ext.serenityCucumberVersion"
     implementation "net.serenity-bdd:serenity-screenplay:$rootProject.ext.serenityVersion"
     implementation "net.serenity-bdd:serenity-screenplay-webdriver:$rootProject.ext.serenityVersion"
+    implementation "net.serenity-bdd:serenity-ensure:$rootProject.ext.serenityVersion"
     implementation "io.github.bonigarcia:webdrivermanager:5.5.3"
 
     //Dependencias manipulación excel
     implementation "org.apache.poi:poi:$rootProject.ext.apachePoiVersion"
     implementation "org.apache.poi:poi-ooxml:$rootProject.ext.apachePoiVersion"
+
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    implementation 'org.apache.logging.log4j:log4j-core:2.22.0'
 
     testImplementation "org.slf4j:slf4j-simple:2.0.9"
     testImplementation "junit:junit:$jUnitVersion"
