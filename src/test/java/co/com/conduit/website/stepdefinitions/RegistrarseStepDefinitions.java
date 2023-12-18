@@ -2,16 +2,17 @@ package co.com.conduit.website.stepdefinitions;
 
 import co.com.conduit.website.exceptions.zonapublica.InformacionRegistradaException;
 import co.com.conduit.website.questions.zonaprivada.ElNombreDeUsuario;
+import co.com.conduit.website.questions.zonaprivada.LasFunciones;
 import co.com.conduit.website.questions.zonapublica.ElBotonSignUp;
 import co.com.conduit.website.questions.zonapublica.ElMensajeDeError;
 import co.com.conduit.website.tasks.comunes.SeleccionarOpcion;
 import co.com.conduit.website.tasks.zonapublica.DiligenciarRegistro;
 import co.com.conduit.website.tasks.zonapublica.Registrarse;
 import co.com.conduit.website.utils.transversal.CargarDatos;
-import io.cucumber.java.DataTableType;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Dado;
 import io.cucumber.java.es.Entonces;
+import io.cucumber.java.es.Y;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,14 +25,9 @@ import static org.hamcrest.CoreMatchers.*;
 
 public class RegistrarseStepDefinitions {
 
-  @DataTableType(replaceWithEmptyString = "[blank]")
-  public String stringType(String cell) {
-    return cell;
-  }
-
-  @Dado("que el usuario se encuentra en la pagina de registro")
-  public void queElUsuarioSeEncuentraEnLaPaginaDeRegistro() {
-    theActorInTheSpotlight().wasAbleTo(SeleccionarOpcion.enLaBarraDeNavegacion());
+  @Dado("que el usuario se encuentra en la pagina de registro {string}")
+  public void queElUsuarioSeEncuentraEnLaPaginaDeRegistro(String menu) {
+    theActorInTheSpotlight().wasAbleTo(SeleccionarOpcion.enLaBarraDeNavegacion(menu));
   }
 
   @Cuando("envia la informacion requerida")
@@ -40,12 +36,19 @@ public class RegistrarseStepDefinitions {
     theActorInTheSpotlight().attemptsTo(Registrarse.enElSitioWeb());
   }
 
-  @Entonces("debera visualizar la pantalla de inicio zona privada con el nombre de usuario {string}")
-  public void deberaVisualizarLaPantallaDeInicioZonaPrivadaConElNombreDeUsuario(String username) {
+  @Entonces("deberia visualizar el nombre de usuario {string} ingresado")
+  public void deberiaVisualizarSuNombreDeUsuario(String username) {
     theActorInTheSpotlight()
       .should(
-        seeThat(ElNombreDeUsuario.mostrado(), equalTo(username))
+        seeThat(ElNombreDeUsuario.mostradoEnPantalla(username), equalTo(username))
           .orComplainWith(InformacionRegistradaException.class, CREDENCIALES_REGISTRADAS));
+  }
+
+  @Y("deberia tener acceso a las funciones de Conduit")
+  public void deberiaTenerAccesoALasFuncionesDeConduit() {
+    theActorInTheSpotlight()
+      .should(
+        seeThat(LasFunciones.deLaCuentaSonVisibles(), is(true)));
   }
 
   @Entonces("debera ser notificado con el mensaje {string} que las credenciales ya existen")

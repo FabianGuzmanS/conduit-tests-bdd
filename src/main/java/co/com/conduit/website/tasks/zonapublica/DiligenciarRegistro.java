@@ -7,7 +7,6 @@ import net.serenitybdd.screenplay.actions.Enter;
 
 import static co.com.conduit.website.models.DatosPrueba.obtener;
 import static co.com.conduit.website.userinterface.zonapublica.RegisterPage.*;
-import static co.com.conduit.website.userinterface.zonapublica.RegisterPage.BTN_SIGNUP;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 
 public class DiligenciarRegistro implements Task {

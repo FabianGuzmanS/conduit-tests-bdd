@@ -9,7 +9,6 @@ import static co.com.conduit.website.userinterface.zonapublica.RegisterPage.BTN_
 public class ElBotonSignUp implements Question<Boolean> {
   @Override
   public Boolean answeredBy(Actor actor) {
-    boolean prueba = Disabled.of(BTN_SIGNUP).answeredBy(actor);
     return Disabled.of(BTN_SIGNUP).answeredBy(actor);
   }
 
