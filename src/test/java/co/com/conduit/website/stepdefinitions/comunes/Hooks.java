@@ -2,6 +2,7 @@ package co.com.conduit.website.stepdefinitions.comunes;
 
 import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
+import io.cucumber.java.DataTableType;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import net.serenitybdd.screenplay.actions.Open;
 import net.serenitybdd.screenplay.actors.OnlineCast;
@@ -16,6 +17,11 @@ import static net.serenitybdd.screenplay.actors.OnStage.*;
 public class Hooks {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(Hooks.class);
+
+  @DataTableType(replaceWithEmptyString = "[blank]")
+  public String stringType(String cell) {
+    return cell;
+  }
 
   @BeforeAll
   public static void setUpBrowser() {
