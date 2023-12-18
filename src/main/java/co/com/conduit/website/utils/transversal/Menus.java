@@ -1,7 +1,8 @@
 package co.com.conduit.website.utils.transversal;
 
 public enum Menus {
-  SIGN_UP("Sign up");
+  SIGN_UP("Sign up"),
+  SIGN_IN("Sign in");
 
   private String menu;
 
